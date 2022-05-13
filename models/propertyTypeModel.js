@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const propertyTypeSchema = new mongoose.Schema(
   {
-    propertyType_id: {
-      type: String,
+    propertyTypeId: {
+      type: Number,
       unique: true,
       trim: true,
       required: true,

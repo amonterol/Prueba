@@ -7,6 +7,11 @@ const reducers = (state, action) => {
         ...state,
         notify: action.payload,
       };
+    case ACTIONS.ADD_PROPERTY_TYPE:
+      return {
+        ...state,
+        propertyTypes: action.payload,
+      };
 
     default:
       return state;

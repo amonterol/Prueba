@@ -27,7 +27,7 @@ function NavBar() {
           <Link href="/">
             <a className="nav-item nav-link">Property</a>
           </Link>
-          <Link href="/propertyType">
+          <Link href="/propertyTypes">
             <a className="nav-item nav-link">Property Types</a>
           </Link>
           <Link href="/propietario">

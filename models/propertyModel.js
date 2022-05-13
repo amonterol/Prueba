@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const propertySchema = new mongoose.Schema(
   {
     property_id: {
-      type: String,
+      type: Number,
       unique: true,
       trim: true,
       required: true,
