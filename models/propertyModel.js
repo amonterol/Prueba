@@ -51,7 +51,5 @@ const propertySchema = new mongoose.Schema(
   }
 );
 
-//module.exports = mongoose.model("Product", productSchema);
-
 module.exports =
-  mongoose.models.property || mongoose.model("property", propertySchema);
+  mongoose.models.Property || mongoose.model("Property", propertySchema);

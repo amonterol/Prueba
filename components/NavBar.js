@@ -3,11 +3,6 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 
 function NavBar() {
-  const router = useRouter();
-  const isActive = (r) => {
-    r === router.pathname ? " active" : "";
-  };
-
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="#">
@@ -29,17 +24,14 @@ function NavBar() {
         id="navbarNavAltMarkup"
       >
         <div className="navbar-nav">
-          <Link href="/propiedad">
-            <a className="nav-item nav-link active">
-              Propiedades
-              <span className="sr-only">(current)</span>
-            </a>
+          <Link href="/">
+            <a className="nav-item nav-link">Property</a>
           </Link>
-          <Link href="/tiposPropiedad">
-            <a className="nav-item nav-link">Tipos de Propiedades</a>
+          <Link href="/propertyType">
+            <a className="nav-item nav-link">Property Types</a>
           </Link>
           <Link href="/propietario">
-            <a className="nav-item nav-link">Dueños</a>
+            <a className="nav-item nav-link">Owner</a>
           </Link>
         </div>
       </div>

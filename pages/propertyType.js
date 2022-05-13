@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 
-const TipoPropiedad = () => {
+const PropertyType = () => {
   return (
     <div>
       <Head>
@@ -12,4 +12,4 @@ const TipoPropiedad = () => {
   );
 };
 
-export default TipoPropiedad;
+export default PropertyType;

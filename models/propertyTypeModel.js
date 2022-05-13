@@ -19,8 +19,6 @@ const propertyTypeSchema = new mongoose.Schema(
   }
 );
 
-//module.exports = mongoose.model("Product", productSchema);
-
 module.exports =
-  mongoose.models.propertyType ||
-  mongoose.model("propertyType", propertyTypeSchema);
+  mongoose.models.PropertyType ||
+  mongoose.model("PropertyType", propertyTypeSchema);

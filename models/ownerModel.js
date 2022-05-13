@@ -8,49 +8,15 @@ const ownerSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    number: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    address: {
-      type: String,
-      trim: true,
-      required: true,
-    },
-    area: {
-      type: Number,
-      trim: true,
-      required: true,
-    },
+
     description: {
       type: String,
       required: true,
     },
-    constructionArea: {
-      type: String,
-      required: true,
-    },
-    images: {
-      type: Array,
-      required: true,
-    },
-    ownerTypeId: {
-      type: Number,
-      trim: true,
-      required: true,
-    },
-    OwnerId: {
-      type: Number,
-      trim: true,
-      required: true,
-    },
   },
   {
-    timestamps: true, //important
+    timestamps: true,
   }
 );
 
-//module.exports = mongoose.model("Product", productSchema);
-
-module.exports = mongoose.models.owner || mongoose.model("owner", ownerSchema);
+module.exports = mongoose.models.Owner || mongoose.model("Owner", ownerSchema);
