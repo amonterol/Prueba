@@ -1,5 +1,6 @@
 export const ACTIONS = {
   NOTIFY: "NOTIFY",
+  ADD_MODAL: "ADD_MODAL",
   ADD_PROPERTY_TYPE: "ADD_PROPERTY_TYPE",
 };
 

@@ -7,6 +7,11 @@ const reducers = (state, action) => {
         ...state,
         notify: action.payload,
       };
+    case ACTIONS.ADD_MODAL:
+      return {
+        ...state,
+        modal: action.payload,
+      };
     case ACTIONS.ADD_PROPERTY_TYPE:
       return {
         ...state,
