@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-}
+  env: {
+    BASE_URL: "http://localhost:3000",
+    MONGODB_URL:
+      "mongodb+srv://braulio:braulio123@cluster0.8lfd5.mongodb.net/pruebaDB?retryWrites=true&w=majority",
+  },
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
