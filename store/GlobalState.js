@@ -9,6 +9,7 @@ export const DataProvider = ({ children }) => {
     notify: {},
     modal: [],
     propertyTypes: [],
+    owners: [],
   };
 
   const [state, dispatch] = useReducer(reducers, initialState);
@@ -19,6 +20,15 @@ export const DataProvider = ({ children }) => {
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
       }
       dispatch({ type: "ADD_PROPERTY_TYPE", payload: res.propertyTypes });
+    });
+  });
+
+  useEffect(() => {
+    getData("owners").then((res) => {
+      if (res.error) {
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      }
+      dispatch({ type: "ADD_OWNER", payload: res.owners });
     });
   });
 

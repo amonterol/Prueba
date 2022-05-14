@@ -17,6 +17,11 @@ const reducers = (state, action) => {
         ...state,
         propertyTypes: action.payload,
       };
+    case ACTIONS.ADD_OWNER:
+      return {
+        ...state,
+        owners: action.payload,
+      };
 
     default:
       return state;

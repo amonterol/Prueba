@@ -25,6 +25,9 @@ img {
 /* ----------- properties ------------- */
 @import url("./property.css");
 
+/* ----------- Create Property ------------- */
+@import url("./create-property.css");
+
 /* ----------------- Responsive ------------------ */
 @media (max-width: 820px) {
   header .brand {

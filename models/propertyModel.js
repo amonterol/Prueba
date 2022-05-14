@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const propertySchema = new mongoose.Schema(
   {
-    property_id: {
+    property_Id: {
       type: Number,
       unique: true,
       trim: true,
@@ -23,10 +23,6 @@ const propertySchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    description: {
-      type: String,
-      required: true,
-    },
     constructionArea: {
       type: String,
       required: true,
@@ -40,7 +36,7 @@ const propertySchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    OwnerId: {
+    ownerId: {
       type: Number,
       trim: true,
       required: true,

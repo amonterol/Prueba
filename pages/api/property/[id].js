@@ -1,36 +1,44 @@
 /* eslint-disable import/no-anonymous-default-export */
+
 import connectDB from "../../../utils/connectDB";
-import Properties from "../../../models/PropertyModel";
+import Property from "../../../models/PropertyModel";
 
 connectDB();
 
 export default async (req, res) => {
   switch (req.method) {
     case "GET":
-      await getProperties(req, res);
+      await getProperty(req, res);
       break;
-    case "POST":
-      await createProperty(req, res);
+    case "PUT":
+      await updateProperty(req, res);
+      break;
+    case "DELETE":
+      await deleteProperty(req, res);
       break;
   }
 };
 
-const getProperties = async (req, res) => {
+const getProperty = async (req, res) => {
   try {
-    const properties = await Properties.find();
+    const { id } = req.query;
 
-    res.json({
-      status: "success",
-      result: properties.length,
-      properties,
-    });
+    const property = await Property.findById(id);
+    if (!property)
+      return res
+        .status(400)
+        .json({ err: "La propiedad no se encuentra en la base de datos!" });
+
+    res.json({ property });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }
 };
 
-const createProperty = async (req, res) => {
+const updateProperty = async (req, res) => {
   try {
+    const { id } = req.query;
+
     const {
       property_Id,
       number,
@@ -39,7 +47,7 @@ const createProperty = async (req, res) => {
       constructionArea,
       propertyTypeId,
       ownerId,
-    } = property;
+    } = req.body;
 
     if (!property_Id)
       return dispatch({
@@ -77,27 +85,39 @@ const createProperty = async (req, res) => {
         payload: { error: "Owner es un campo requerido." },
       });
 
-    const property = await Properties.findOne({ property_Id });
-    if (property) {
-      return res
-        .status(400)
-        .json({ err: "Esta propiedad ya existe en la base de datos." });
-    }
+    if (images.length === 0)
+      return dispatch({
+        type: "NOTIFY",
+        payload: { error: "La IMAGEN del producto es un campo requerido." },
+      });
 
-    const newProperty = new Properties({
-      property_Id,
-      number,
-      address,
-      area,
-      constructionArea,
-      propertyTypeId,
-      ownerId,
-      images,
-    });
+    await Property.findOneAndUpdate(
+      { _id: id },
+      {
+        property_Id,
+        number,
+        address,
+        area,
+        constructionArea,
+        propertyTypeId,
+        ownerId,
+        images,
+      }
+    );
 
-    await newProperty.save();
+    res.json({ msg: "¡Los datos de la propiedad ha sido actualizado" });
+  } catch (err) {
+    return res.status(500).json({ err: err.message });
+  }
+};
+
+const deleteProperty = async (req, res) => {
+  try {
+    const { id } = req.query;
+
+    await Property.findByIdAndDelete(id);
     res.json({
-      msg: "Los datos de la propiedad se han guardado en la base de datos.",
+      msg: "Los datos de la propiedad han sido eliminados de la base de datos!",
     });
   } catch (err) {
     return res.status(500).json({ err: err.message });

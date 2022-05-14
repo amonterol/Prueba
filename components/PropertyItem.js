@@ -11,7 +11,7 @@ const PropertyItem = ({ property }) => {
   const adminLink = () => {
     return (
       <>
-        <Link href="/">
+        <Link href={`create/${property._id}`}>
           <a className="btn btn-info" style={{ marginRight: "5px", flex: 1 }}>
             Edit
           </a>
@@ -27,9 +27,9 @@ const PropertyItem = ({ property }) => {
               payload: [
                 {
                   data: "",
-                  id: product._id,
-                  title: product.title,
-                  type: "DELETE_PRODUCT",
+                  id: property._id,
+                  title: property.number,
+                  type: "DELETE_PROPERTY",
                 },
               ],
             })
@@ -44,6 +44,16 @@ const PropertyItem = ({ property }) => {
   return (
     <div className="col mt-2 mb-2">
       <div className="card m-0 p-0" style={{ width: "20rem" }}>
+        const router = useRouter()
+        {
+          <input
+            type="checkbox"
+            checked={property.checked}
+            className="position-absolute"
+            style={{ height: "20px", width: "20px" }}
+            onChange={() => handleCheck(product._id)}
+          />
+        }
         <img
           className=" card-img-top"
           src={property.images[0].url}
@@ -54,7 +64,7 @@ const PropertyItem = ({ property }) => {
         <div className=".card-img-top">
           <h4 className="card-title">{property.Number}</h4>
           <h6 className="card-text p-3">Area: ${property.Area}</h6>
-          <h6 className="card-text p-3">Area: ${property.ConstructionArea}</h6>
+          <h6 className="card-text p-3">Area: ${property.Address}</h6>
           <div className="row justify-content-between mx-0">{adminLink()}</div>
         </div>
       </div>

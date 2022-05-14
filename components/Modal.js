@@ -2,12 +2,15 @@ import { useContext } from "react";
 import { DataContext } from "../store/GlobalState";
 import { deleteItem } from "../store/Actions";
 import { deleteData } from "../utils/fetchData";
+import { useRouter } from "next/router";
 
 const Modal = () => {
   const { state, dispatch } = useContext(DataContext);
   const { modal } = state;
 
-  const deleteCategories = (item) => {
+  const router = useRouter();
+
+  const deletePropertyTypes = (item) => {
     deleteData(`propertyTypes/${item.id}`).then((res) => {
       if (res.err)
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
@@ -17,11 +20,38 @@ const Modal = () => {
     });
   };
 
+  const deleteOwners = (item) => {
+    deleteData(`owners/${item.id}`).then((res) => {
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+
+      dispatch(deleteItem(item.data, item.id, item.type));
+      return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+    });
+  };
+
+  const deleteProperty = (item) => {
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    deleteData(`property/${item.id}`).then((res) => {
+      if (res.err)
+        return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      dispatch({ type: "NOTIFY", payload: { success: res.msg } });
+      return router.push("/");
+    });
+  };
+
   const handleSubmit = () => {
     if (modal.length !== 0) {
       for (const item of modal) {
-        if (item.type === "ADD_PROPERTY_TYPE") deleteCategories(item);
-
+        if (item.type === "ADD_PROPERTY_TYPE") {
+          deletePropertyTypes(item);
+        }
+        if (item.type === "ADD_OWNER") {
+          deleteOwners(item);
+        }
+        if (item.type === "DELETE_PROPERTY") {
+          deleteProperty(item);
+        }
         dispatch({ type: "ADD_MODAL", payload: [] });
       }
     }
