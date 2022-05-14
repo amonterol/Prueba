@@ -33,21 +33,25 @@ const Owners = () => {
         type: "NOTIFY",
         payload: { error: "Name can not be left blank." },
       });
+
     if (!telephone)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Telephone can not be left blank." },
       });
+
     if (!email)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "Email can not be left blank." },
       });
+
     if (!identificationNumber)
       return dispatch({
         type: "NOTIFY",
         payload: { error: "IdentificationNumber can not be left blank." },
       });
+
     if (!address)
       return dispatch({
         type: "NOTIFY",
@@ -58,7 +62,6 @@ const Owners = () => {
 
     let res;
     if (id) {
-      console.log(id);
       res = await putData(`owners/${id}`, {
         ownerId,
         name,
@@ -71,8 +74,6 @@ const Owners = () => {
       if (res.err) {
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
       }
-
-      console.log(res);
 
       dispatch(updateItem(owners, id, res.owner, "ADD_OWNER"));
     } else {
@@ -113,107 +114,136 @@ const Owners = () => {
   };
 
   return (
-    <div className="col-md-6 mx-auto my-3">
+    <div className="col mx-auto my-3">
       <Head>
         <title>Owners</title>
       </Head>
-      <h1>Onwer Page ahora soy el otro</h1>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Add a new product type id"
-          value={ownerId}
-          onChange={(e) => setOwnerId(e.target.value)}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Add a new name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Add a new telephone"
-          value={telephone}
-          onChange={(e) => setTelephone(e.target.value)}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Add a new email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Add a new identificationNumber"
-          value={identificationNumber}
-          onChange={(e) => setIdentificationNumber(e.target.value)}
-        />
-      </div>
-      <div className="input-group mb-3">
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Add a new address"
-          value={address}
-          onChange={(e) => setAddress(e.target.value)}
-        />
-      </div>
-      <button className="btn btn-secondary ml-1" onClick={createOwner}>
-        {id ? "Actualizar" : "Crear"}
-      </button>
-      <div>
-        {owners.map((owner) => (
-          <div key={owner._id} className="card my-2 text-capitalize">
-            <div className="card-body d-flex justify-content-between">
-              {owner.ownerId} {owner.name}
-              <div>
-                <button
-                  className="btn btn-info"
-                  style={{ marginLeft: "5px", flex: 1 }}
-                  onClick={() => handleEditOwner(owner)}
-                >
-                  Edit
-                </button>
+      <h1>Gestión de Owners</h1>
 
-                <button
-                  className="btn btn-danger"
-                  style={{ marginLeft: "5px", flex: 1 }}
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  onClick={() =>
-                    dispatch({
-                      type: "ADD_MODAL",
-                      payload: [
-                        {
-                          data: owners,
-                          id: owner._id,
-                          title: owner.name,
-                          type: "ADD_OWNER",
-                        },
-                      ],
-                    })
-                  }
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
+      <div className="row">
+        <div className="col-md-6 mx-auto my-3 ">
+          <div className="input-group mb-3 w-100 p-2">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Add a new product type id"
+              value={ownerId}
+              onChange={(e) => setOwnerId(e.target.value)}
+            />
           </div>
-        ))}
+          <div className="input-group mb-3 w-100 p-2">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Add a new name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="input-group mb-3 w-100 p-2">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Add a new telephone"
+              value={telephone}
+              onChange={(e) => setTelephone(e.target.value)}
+            />
+          </div>
+          <div className="input-group mb-3 w-100 p-2">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Add a new email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input-group mb-3 w-100 p-2">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Add a new identificationNumber"
+              value={identificationNumber}
+              onChange={(e) => setIdentificationNumber(e.target.value)}
+            />
+          </div>
+          <div className="input-group mb-3 w-100 p-2">
+            <input
+              type="text"
+              className="form-control"
+              placeholder="Add a new address"
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
+            />
+          </div>
+          <button
+            className="btn btn-secondary ml-1 my-3 w-100 h4"
+            onClick={createOwner}
+          >
+            {id ? "Actualizar" : "Crear"}
+          </button>
+        </div>
+      </div>
+
+      <div className="table-responsive w-100 mx-auto">
+        <table className="table  table-striped table-font">
+          <thead className="thead-dark ">
+            <tr>
+              <th></th>
+              <th></th>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Telephone</th>
+              <th>Email</th>
+              <th>Identification Number</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            {owners.map((owner, index) => (
+              <tr key={owner._id} style={{ cursor: "pointer" }}>
+                <th>
+                  <button
+                    className="btn btn-info"
+                    style={{ marginLeft: "5px", flex: 1 }}
+                    onClick={() => handleEditOwner(owner)}
+                  >
+                    Edit
+                  </button>
+                </th>
+                <th>
+                  <button
+                    className="btn btn-danger"
+                    style={{ marginLeft: "5px", flex: 1 }}
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                    onClick={() =>
+                      dispatch({
+                        type: "ADD_MODAL",
+                        payload: [
+                          {
+                            data: owners,
+                            id: owner._id,
+                            title: owner.name,
+                            type: "ADD_OWNER",
+                          },
+                        ],
+                      })
+                    }
+                  >
+                    Delete
+                  </button>
+                </th>
+                <th>{owner._id}</th>
+                <th>{owner.name}</th>
+                <th>{owner.telephone}</th>
+                <th>{owner.email}</th>
+                <th>{owner.identificationNumber}</th>
+                <th>{owner.address}</th>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

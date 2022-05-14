@@ -34,7 +34,6 @@ const PropertyTypes = () => {
 
     let res;
     if (id) {
-      console.log(id);
       res = await putData(`propertyTypes/${id}`, {
         propertyTypeId,
         description,
@@ -43,8 +42,6 @@ const PropertyTypes = () => {
       if (res.err) {
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
       }
-
-      console.log(res);
 
       dispatch(
         updateItem(propertyTypes, id, res.propertyType, "ADD_PROPERTY_TYPE")

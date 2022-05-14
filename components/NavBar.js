@@ -4,10 +4,11 @@ import { useRouter } from "next/router";
 
 function NavBar() {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
-        Gestión de Propiedades
-      </a>
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <Link href="/">
+        <a className="navbar-brand">Prueba</a>
+      </Link>
+
       <button
         className="navbar-toggler"
         type="button"
