@@ -17,7 +17,7 @@ export default async (req, res) => {
 
 const createOwner = async (req, res) => {
   try {
-    const { ownerId, name, telephone, email, identificacionNumber, address } =
+    const { ownerId, name, telephone, email, identificationNumber, address } =
       req.body;
 
     if (!ownerId) {
@@ -36,7 +36,7 @@ const createOwner = async (req, res) => {
       return res.status(400).json({ err: "Email can not be left blank." });
     }
 
-    if (!identificacionNumber) {
+    if (!identificationNumber) {
       return res
         .status(400)
         .json({ err: "IdentificationNumber can not be left blank." });
@@ -51,7 +51,7 @@ const createOwner = async (req, res) => {
       name,
       telephone,
       email,
-      identificacionNumber,
+      identificationNumber,
       address,
     });
 
@@ -68,9 +68,9 @@ const createOwner = async (req, res) => {
 
 const getOwners = async (req, res) => {
   try {
-    const Owners = await Owner.find();
+    const owners = await Owner.find();
 
-    res.json({ Owners });
+    res.json({ owners });
   } catch (err) {
     return res.status(500).json({ err: err.message });
   }

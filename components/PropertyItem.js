@@ -1,45 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import Link from "next/link";
-import Image from "next/image";
 import React, { useContext } from "react";
 import { DataContext } from "../store/GlobalState";
 
 const PropertyItem = ({ property }) => {
   const { state, dispatch } = useContext(DataContext);
-
-  const adminLink = () => {
-    return (
-      <>
-        <Link href={`create/${property._id}`}>
-          <a className="btn btn-info" style={{ marginRight: "5px", flex: 1 }}>
-            Edit
-          </a>
-        </Link>
-        <button
-          className="btn btn-danger"
-          style={{ marginLeft: "5px", flex: 1 }}
-          data-toggle="modal"
-          data-target="#exampleModal"
-          onClick={() =>
-            dispatch({
-              type: "ADD_MODAL",
-              payload: [
-                {
-                  data: "",
-                  id: property._id,
-                  title: property.number,
-                  type: "DELETE_PROPERTY",
-                },
-              ],
-            })
-          }
-        >
-          Delete
-        </button>
-      </>
-    );
-  };
 
   return (
     <div className="col mt-2 mb-2">
@@ -65,7 +31,37 @@ const PropertyItem = ({ property }) => {
           <h4 className="card-title">{property.Number}</h4>
           <h6 className="card-text p-3">Area: ${property.Area}</h6>
           <h6 className="card-text p-3">Area: ${property.Address}</h6>
-          <div className="row justify-content-between mx-0">{adminLink()}</div>
+          <div className="row justify-content-between mx-0">
+            <Link href={`create/${property._id}`}>
+              <a
+                className="btn btn-info"
+                style={{ marginRight: "5px", flex: 1 }}
+              >
+                Edit
+              </a>
+            </Link>
+            <button
+              className="btn btn-danger"
+              style={{ marginLeft: "5px", flex: 1 }}
+              data-toggle="modal"
+              data-target="#exampleModal"
+              onClick={() =>
+                dispatch({
+                  type: "ADD_MODAL",
+                  payload: [
+                    {
+                      data: "",
+                      id: property._id,
+                      title: property.number,
+                      type: "DELETE_PROPERTY",
+                    },
+                  ],
+                })
+              }
+            >
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>

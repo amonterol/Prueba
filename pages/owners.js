@@ -102,7 +102,7 @@ const Owners = () => {
     return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
 
-  const handleEditOwner = () => {
+  const handleEditOwner = (owner) => {
     setId(owner._id);
     setOwnerId(owner.ownerId);
     setName(owner.name);

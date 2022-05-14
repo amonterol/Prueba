@@ -28,14 +28,12 @@ const ownerSchema = new mongoose.Schema(
     },
     address: {
       type: String,
-      type: String,
+      required: true,
     },
   },
   {
     timestamps: true, //important
   }
 );
-
-//module.exports = mongoose.model("Product", productSchema);
 
 module.exports = mongoose.models.Owner || mongoose.model("Owner", ownerSchema);

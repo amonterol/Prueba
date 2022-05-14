@@ -18,7 +18,7 @@ export default async (req, res) => {
 const updateOwner = async (req, res) => {
   try {
     const { id } = req.query;
-    const { ownerId, name, telephone, email, identificacionNumber, address } =
+    const { ownerId, name, telephone, email, identificationNumber, address } =
       req.body;
 
     if (!ownerId) {
@@ -37,7 +37,7 @@ const updateOwner = async (req, res) => {
       return res.status(400).json({ err: "Email can not be left blank." });
     }
 
-    if (!identificacionNumber) {
+    if (!identificationNumber) {
       return res
         .status(400)
         .json({ err: "IdentificationNumber can not be left blank." });
@@ -54,7 +54,7 @@ const updateOwner = async (req, res) => {
         name,
         telephone,
         email,
-        identificacionNumber,
+        identificationNumber,
         address,
       }
     );
@@ -66,7 +66,7 @@ const updateOwner = async (req, res) => {
         name,
         telephone,
         email,
-        identificacionNumber,
+        identificationNumber,
         address,
       },
     });

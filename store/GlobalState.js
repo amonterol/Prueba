@@ -21,7 +21,7 @@ export const DataProvider = ({ children }) => {
       }
       dispatch({ type: "ADD_PROPERTY_TYPE", payload: res.propertyTypes });
     });
-  });
+  }, []);
 
   useEffect(() => {
     getData("owners").then((res) => {
@@ -30,7 +30,7 @@ export const DataProvider = ({ children }) => {
       }
       dispatch({ type: "ADD_OWNER", payload: res.owners });
     });
-  });
+  }, []);
 
   return (
     <DataContext.Provider value={{ state, dispatch }}>
