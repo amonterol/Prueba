@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ownerSchema = new mongoose.Schema(
   {
-    owner_Id: {
+    ownerId: {
       type: Number,
       unique: true,
       trim: true,

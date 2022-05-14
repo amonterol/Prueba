@@ -20,7 +20,11 @@ const updatePropertyType = async (req, res) => {
   try {
     const { id } = req.query;
     const { propertyTypeId, description } = req.body;
-    if (!propertyTypeId || !description) {
+    if (!propertyTypeId) {
+      return res.status(400).json({ err: "Please add all the fields." });
+    }
+
+    if (!description) {
       return res.status(400).json({ err: "Please add all the fields." });
     }
 

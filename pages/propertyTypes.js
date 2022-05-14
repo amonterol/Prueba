@@ -65,7 +65,7 @@ const PropertyTypes = () => {
     return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
   };
 
-  const handleEditCategory = (propertyType) => {
+  const handleEditPropertyType = (propertyType) => {
     setId(propertyType._id);
     setPropertyTypeId(propertyType.propertyTypeId);
     setDescription(propertyType.description);
@@ -76,7 +76,7 @@ const PropertyTypes = () => {
       <Head>
         <title>Tipos de Propiedad</title>
       </Head>
-      <h1>Tipos de Propiedad Page</h1>
+      <h1>Tipos de Propiedad Page Soy yo</h1>
       <div className="input-group mb-3">
         <input
           type="text"
@@ -90,7 +90,7 @@ const PropertyTypes = () => {
         <input
           type="text"
           className="form-control"
-          placeholder="Add a new category"
+          placeholder="Add a new description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
@@ -107,7 +107,7 @@ const PropertyTypes = () => {
                 <button
                   className="btn btn-info"
                   style={{ marginLeft: "5px", flex: 1 }}
-                  onClick={() => handleEditCategory(propertyType)}
+                  onClick={() => handleEditPropertyType(propertyType)}
                 >
                   Edit
                 </button>

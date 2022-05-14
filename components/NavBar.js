@@ -33,8 +33,8 @@ function NavBar() {
           <Link href="/propertyTypes">
             <a className="nav-item nav-link">Property Types</a>
           </Link>
-          <Link href="/propietario">
-            <a className="nav-item nav-link">Owner</a>
+          <Link href="/owners">
+            <a className="nav-item nav-link">Owners</a>
           </Link>
         </div>
       </div>
