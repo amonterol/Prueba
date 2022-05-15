@@ -6,14 +6,15 @@ import { DataContext } from "../../store/GlobalState";
 import { imageUpload } from "../../utils/imageUpload";
 import { postData, getData, putData } from "../../utils/fetchData";
 import { useRouter } from "next/router";
+import validation from "../../utils/validation";
 
 const CreateProperty = () => {
   const initialState = {
     property_Id: "",
     number: "",
     address: "",
-    area: 0,
-    constructionArea: 0,
+    area: "",
+    constructionArea: "",
     propertyTypeId: 0,
     ownerId: 0,
   };
@@ -32,13 +33,15 @@ const CreateProperty = () => {
   const [images, setImages] = useState([]);
 
   const { state, dispatch } = useContext(DataContext);
-  const { propertyTypes } = state;
+  const { propertyTypes, owners } = state;
 
   const router = useRouter();
 
   const { id } = router.query;
 
   const [onEdit, setOnEdit] = useState(false);
+
+  useEffect(() => {});
 
   useEffect(() => {
     if (id) {
@@ -113,6 +116,22 @@ const CreateProperty = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    const errMsg = validation(
+      property_Id,
+      number,
+      address,
+      area,
+      constructionArea,
+      propertyTypeId,
+      ownerId
+    );
+
+    if (errMsg) {
+      return dispatch({ type: "NOTIFY", payload: { error: errMsg } });
+    }
+
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    /*
     if (!property_Id)
       return dispatch({
         type: "NOTIFY",
@@ -148,7 +167,7 @@ const CreateProperty = () => {
         type: "NOTIFY",
         payload: { error: "Owner es un campo requerido." },
       });
-
+*/
     if (images.length === 0)
       return dispatch({
         type: "NOTIFY",
@@ -249,8 +268,8 @@ const CreateProperty = () => {
               >
                 <option value="all">Property Types</option>
                 {propertyTypes.map((item) => (
-                  <option key={item._id} value={item._id}>
-                    {item.description}
+                  <option key={item._id} value={item.propertyTypeId}>
+                    {item.propertyTypeId} {item.description}
                   </option>
                 ))}
               </select>
@@ -265,9 +284,9 @@ const CreateProperty = () => {
                 className="custom-select text-capitalize"
               >
                 <option value="all">Owner</option>
-                {propertyTypes.map((item) => (
-                  <option key={item._id} value={item._id}>
-                    {item.description}
+                {owners.map((item) => (
+                  <option key={item._id} value={item.ownerId}>
+                    {item.ownerId} {item.name}
                   </option>
                 ))}
               </select>
