@@ -78,14 +78,16 @@ const createProperty = async (req, res) => {
         payload: { error: "Owner es un campo requerido." },
       });
       */
-    /*
+
     const property = await Property.findOne({ property_Id });
     if (property) {
       return res
         .status(400)
-        .json({ err: "Esta propiedad ya existe en la base de datos." });
+        .json({
+          err: "La property_Id fue registrada anteriormente en la base de datos.",
+        });
     }
-*/
+
     const newProperty = new Property({
       property_Id,
       number,

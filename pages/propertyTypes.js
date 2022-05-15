@@ -17,6 +17,8 @@ const PropertyTypes = () => {
 
   const [id, setId] = useState("");
 
+  const [bandera, setBandera] = useState(true);
+
   const createPropertyType = async () => {
     if (!propertyTypeId)
       return dispatch({
@@ -46,6 +48,7 @@ const PropertyTypes = () => {
       dispatch(
         updateItem(propertyTypes, id, res.propertyType, "ADD_PROPERTY_TYPE")
       );
+      setBandera(false);
     } else {
       res = await postData("propertyTypes", { propertyTypeId, description });
       if (res.err) {
@@ -98,7 +101,7 @@ const PropertyTypes = () => {
         className="btn btn-secondary mx-auto w-50 d-flex  justify-content-center "
         onClick={createPropertyType}
       >
-        {id ? "Actualizar" : "Crear"}
+        {id && bandera ? "Actualizar" : "Crear"}
       </button>
       <h4 className="mx-auto d-flex justify-content-center mt-5">
         Lista de Tipos de Propiedades

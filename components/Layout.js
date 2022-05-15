@@ -5,7 +5,7 @@ import Modal from "./Modal";
 
 function Layout({ children }) {
   return (
-    <div className="container">
+    <div className="container-xl p-3 my-3 ">
       {" "}
       <NavBar />
       <Notify />

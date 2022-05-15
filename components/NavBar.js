@@ -26,7 +26,7 @@ function NavBar() {
       >
         <div className="navbar-nav">
           <Link href="/">
-            <a className="nav-item nav-link">Property</a>
+            <a className="nav-item nav-link">Properties</a>
           </Link>
           <Link href="/create">
             <a className="nav-item nav-link">Create Property</a>

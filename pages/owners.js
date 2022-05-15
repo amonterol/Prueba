@@ -7,6 +7,7 @@ import { DataContext } from "../store/GlobalState";
 
 import { updateItem } from "../store/Actions";
 import { postData, putData } from "../utils/fetchData";
+import validationOwner from "../utils/validationOwner";
 
 const Owners = () => {
   const [ownerId, setOwnerId] = useState("");
@@ -22,6 +23,21 @@ const Owners = () => {
   const [id, setId] = useState("");
 
   const createOwner = async () => {
+    const errMsg = validationOwner(
+      ownerId,
+      name,
+      telephone,
+      email,
+      identificationNumber,
+      address
+    );
+
+    if (errMsg) {
+      return dispatch({ type: "NOTIFY", payload: { error: errMsg } });
+    }
+
+    dispatch({ type: "NOTIFY", payload: { loading: true } });
+    /*
     if (!ownerId)
       return dispatch({
         type: "NOTIFY",
@@ -59,7 +75,7 @@ const Owners = () => {
       });
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
-
+*/
     let res;
     if (id) {
       res = await putData(`owners/${id}`, {
@@ -197,6 +213,7 @@ const Owners = () => {
               <th></th>
               <th></th>
               <th>ID</th>
+              <th>Owner ID</th>
               <th>Name</th>
               <th>Telephone</th>
               <th>Email</th>
@@ -240,6 +257,7 @@ const Owners = () => {
                   </button>
                 </th>
                 <th>{owner._id}</th>
+                <th>{owner.ownerId}</th>
                 <th>{owner.name}</th>
                 <th>{owner.telephone}</th>
                 <th>{owner.email}</th>

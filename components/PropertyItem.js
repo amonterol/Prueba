@@ -4,20 +4,19 @@ import Link from "next/link";
 import React, { useContext } from "react";
 import { DataContext } from "../store/GlobalState";
 
-const PropertyItem = ({ property }) => {
+const PropertyItem = ({ property, handleCheck }) => {
   const { state, dispatch } = useContext(DataContext);
 
   return (
     <div className="col mt-2 mb-2">
       <div className="card m-0 p-0" style={{ width: "20rem" }}>
-        const router = useRouter()
         {
           <input
             type="checkbox"
             checked={property.checked}
             className="position-absolute"
             style={{ height: "20px", width: "20px" }}
-            onChange={() => handleCheck(product._id)}
+            onChange={() => handleCheck(property._id)}
           />
         }
         <img
@@ -27,42 +26,10 @@ const PropertyItem = ({ property }) => {
           width="300%"
           height="300%"
         />
-        <div className=".card-img-top">
-          <h4 className="card-title">{property.Number}</h4>
-          <h6 className="card-text p-3">Area: ${property.Area}</h6>
-          <h6 className="card-text p-3">Area: ${property.Address}</h6>
-          <div className="row justify-content-between mx-0">
-            <Link href={`create/${property._id}`}>
-              <a
-                className="btn btn-info"
-                style={{ marginRight: "5px", flex: 1 }}
-              >
-                Edit
-              </a>
-            </Link>
-            <button
-              className="btn btn-danger"
-              style={{ marginLeft: "5px", flex: 1 }}
-              data-toggle="modal"
-              data-target="#exampleModal"
-              onClick={() =>
-                dispatch({
-                  type: "ADD_MODAL",
-                  payload: [
-                    {
-                      data: "",
-                      id: property._id,
-                      title: property.number,
-                      type: "DELETE_PROPERTY",
-                    },
-                  ],
-                })
-              }
-            >
-              Delete
-            </button>
-          </div>
-        </div>
+
+        {/*  ---------------------------------- women and men clothes secction ------------------------------------ */}
+
+        {/*  ---------------------------------- women and men clothes secction ------------------------------------ */}
       </div>
     </div>
   );

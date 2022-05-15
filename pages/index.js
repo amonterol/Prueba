@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
@@ -68,7 +69,7 @@ const Home = (props) => {
         />
 
         <button
-          className="btn btn-danger ml-2"
+          className="btn btn-danger ml-1"
           data-toggle="modal"
           data-target="#exampleModal"
           onClick={handleDeleteAll}
@@ -76,17 +77,97 @@ const Home = (props) => {
           DELETE ALL
         </button>
       </div>
-      <div className="properties">
+      <div className="my-4">
         <Head>
           <title>Home</title>
         </Head>
 
         {properties.length === 0 ? (
-          <h2>No hay propiedades para mostrar</h2>
+          <h3>No hay propiedades para mostrar</h3>
         ) : (
-          properties.map((property) => (
-            <PropertyItem key={property._id} property={property} />
-          ))
+          <div className="table-responsive w-100 mx-auto ">
+            <table className="table  table-striped table-font table-bordered">
+              <thead className="thead-light ">
+                <tr>
+                  <th scope="col"></th>
+                  <th scope="col"></th>
+                  <th scope="col">Imagen #1</th>
+                  <th scope="col">_id</th>
+                  <th scope="col">Property_Id</th>
+                  <th scope="col">Number</th>
+                  <th scope="col">Address</th>
+                  <th scope="col">Area</th>
+                  <th scope="col">Construction Area</th>
+                  <th scope="col">Property Type</th>
+                  <th scope="col">Owner</th>
+                </tr>
+              </thead>
+              <tbody>
+                {properties.map((property) => (
+                  <tr key={property._id} style={{ cursor: "pointer" }}>
+                    <th scope="row">
+                      <Link href={`create/${property._id}`}>
+                        <a
+                          className="btn btn-info"
+                          style={{ marginRight: "5px", flex: 1 }}
+                        >
+                          Edit
+                        </a>
+                      </Link>
+                    </th>
+                    <th>
+                      <button
+                        className="btn btn-danger"
+                        style={{ marginLeft: "5px", flex: 1 }}
+                        data-toggle="modal"
+                        data-target="#exampleModal"
+                        onClick={() =>
+                          dispatch({
+                            type: "ADD_MODAL",
+                            payload: [
+                              {
+                                data: "",
+                                id: property._id,
+                                title: property.number,
+                                type: "DELETE_PROPERTY",
+                              },
+                            ],
+                          })
+                        }
+                      >
+                        Delete
+                      </button>
+                    </th>
+                    <th>
+                      <div className="card mx-3 p-0" style={{ width: "6rem" }}>
+                        {
+                          <input
+                            type="checkbox"
+                            checked={property.checked}
+                            className="position-absolute"
+                            style={{ height: "20px", width: "20px" }}
+                            onChange={() => handleCheck(property._id)}
+                          />
+                        }
+                        <img
+                          src={property.images[0].url}
+                          alt={property.images[0].url}
+                        />
+                      </div>
+                    </th>
+                    <th>{property._id}</th>
+                    <th>{property.property_Id}</th>
+                    <th>{property.number}</th>
+                    <th>{property.address}</th>
+                    <th>{property.area}</th>
+                    <th>{property.constructionArea}</th>
+                    <th>{property.propertyTypeId}</th>
+                    <th>{property.ownerId}</th>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>
