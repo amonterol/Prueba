@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import connectDB from "../../../utils/connectDB";
-import Properties from "../../../models/PropertyModel";
+import Property from "../../../models/PropertyModel";
 
 connectDB();
 
@@ -17,7 +17,7 @@ export default async (req, res) => {
 
 const getProperties = async (req, res) => {
   try {
-    const properties = await Properties.find();
+    const properties = await Property.find();
 
     res.json({
       status: "success",
@@ -39,8 +39,9 @@ const createProperty = async (req, res) => {
       constructionArea,
       propertyTypeId,
       ownerId,
-    } = property;
-
+      images,
+    } = req.body;
+    /*
     if (!property_Id)
       return dispatch({
         type: "NOTIFY",
@@ -76,15 +77,16 @@ const createProperty = async (req, res) => {
         type: "NOTIFY",
         payload: { error: "Owner es un campo requerido." },
       });
-
-    const property = await Properties.findOne({ property_Id });
+      */
+    /*
+    const property = await Property.findOne({ property_Id });
     if (property) {
       return res
         .status(400)
         .json({ err: "Esta propiedad ya existe en la base de datos." });
     }
-
-    const newProperty = new Properties({
+*/
+    const newProperty = new Property({
       property_Id,
       number,
       address,

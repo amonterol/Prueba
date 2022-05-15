@@ -10,14 +10,15 @@ import validation from "../../utils/validation";
 
 const CreateProperty = () => {
   const initialState = {
-    property_Id: "",
+    property_Id: 0,
     number: "",
     address: "",
-    area: "",
-    constructionArea: "",
+    area: 0,
+    constructionArea: 0,
     propertyTypeId: 0,
     ownerId: 0,
   };
+
   const [property, setProperty] = useState(initialState);
 
   const {
@@ -33,6 +34,7 @@ const CreateProperty = () => {
   const [images, setImages] = useState([]);
 
   const { state, dispatch } = useContext(DataContext);
+
   const { propertyTypes, owners } = state;
 
   const router = useRouter();
@@ -40,8 +42,7 @@ const CreateProperty = () => {
   const { id } = router.query;
 
   const [onEdit, setOnEdit] = useState(false);
-
-  useEffect(() => {});
+  const [bandera, setBandera] = useState(true);
 
   useEffect(() => {
     if (id) {
@@ -77,11 +78,13 @@ const CreateProperty = () => {
       });
 
     files.forEach((file) => {
-      if (file.size > 1024 * 1024)
+      if (file.size > 1024 * 1024) {
         return (err = "El tamaño de la imagen excede 1mb");
+      }
 
-      if (file.type !== "image/jpeg" && file.type !== "image/png")
+      if (file.type !== "image/jpeg" && file.type !== "image/png") {
         return (err = "El formato del imagen debe ser png o jpeg.");
+      }
 
       num += 1;
       if (num <= 5) {
@@ -131,55 +134,38 @@ const CreateProperty = () => {
     }
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
-    /*
-    if (!property_Id)
+
+    if (images.length === 0)
       return dispatch({
         type: "NOTIFY",
         payload: {
           error:
-            "El número de identificación de la porpiedad  es un campo requerido.",
+            "La IMAGEN del producto es un campo requerido." +
+            " " +
+            property_Id +
+            " " +
+            number +
+            " " +
+            address +
+            " " +
+            area +
+            " " +
+            constructionArea +
+            " " +
+            propertyTypeId +
+            " " +
+            ownerId,
         },
       });
-    if (!number)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "El número de propiedad  es un campo requerido." },
-      });
-    if (!address)
-      return dispatch({
-        type: "NOTIFY",
-        payload: {
-          error: "La dirección de la propiedad es un campo requerido.",
-        },
-      });
-    if (!area)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "El area de la propiedad es un campo requerido." },
-      });
-    if (!propertyTypeId)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Property Type es un campo requerido." },
-      });
-    if (!ownerId)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Owner es un campo requerido." },
-      });
-*/
-    if (images.length === 0)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "La IMAGEN del producto es un campo requerido." },
-      });
-
     dispatch({ type: "NOTIFY", payload: { loading: true } });
+
     let media = [];
     const imgNewURL = images.filter((img) => !img.url);
     const imgOldURL = images.filter((img) => img.url);
 
-    if (imgNewURL.length > 0) media = await imageUpload(imgNewURL);
+    if (imgNewURL.length > 0) {
+      media = await imageUpload(imgNewURL);
+    }
 
     let res;
     if (onEdit) {
@@ -187,15 +173,26 @@ const CreateProperty = () => {
         ...property,
         images: [...imgOldURL, ...media],
       });
-      if (res.err)
+
+      if (res.err) {
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      }
+
+      setProperty(initialState);
+      setImages([]);
+      setBandera(false);
     } else {
       res = await postData("property", {
         ...property,
         images: [...imgOldURL, ...media],
       });
-      if (res.err)
+
+      if (res.err) {
         return dispatch({ type: "NOTIFY", payload: { error: res.err } });
+      }
+
+      setProperty(initialState);
+      setImages([]);
     }
 
     return dispatch({ type: "NOTIFY", payload: { success: res.msg } });
@@ -204,8 +201,12 @@ const CreateProperty = () => {
   return (
     <div className="create-property">
       <Head>
-        <title></title>
+        <title>New Property</title>
       </Head>
+
+      <h3 className="mx-auto d-flex justify-content-center my-5">
+        Datos de la nueva propiedad
+      </h3>
       <form className="row" onSubmit={handleSubmit}>
         <div className="col-md-6">
           <input
@@ -293,7 +294,7 @@ const CreateProperty = () => {
             </div>
           </div>
           <button type="submit" className="btn btn-info my-2 px-4">
-            {onEdit ? "Update" : "Create"}
+            {onEdit && bandera ? "Update" : "Create"}
           </button>
         </div>
 

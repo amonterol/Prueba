@@ -69,21 +69,23 @@ const PropertyTypes = () => {
   };
 
   return (
-    <div className="col-md-6 mx-auto my-3">
+    <div className="col-md-8 mx-auto my-3">
       <Head>
         <title>Tipos de Propiedad</title>
       </Head>
-      <h1>Tipos de Propiedad Page Soy yo</h1>
-      <div className="input-group mb-3">
+      <h3 className="mx-auto d-flex justify-content-center my-5">
+        Gestión de Tipos de Propiedad{" "}
+      </h3>
+      <div className="input-group my-5  ">
         <input
           type="text"
-          className="form-control"
+          className="form-control  "
           placeholder="Add a new product type id"
           value={propertyTypeId}
           onChange={(e) => setPropertyTypeId(e.target.value)}
         />
       </div>
-      <div className="input-group mb-3">
+      <div className="input-group  my-5">
         <input
           type="text"
           className="form-control"
@@ -92,48 +94,68 @@ const PropertyTypes = () => {
           onChange={(e) => setDescription(e.target.value)}
         />
       </div>
-      <button className="btn btn-secondary ml-1" onClick={createPropertyType}>
+      <button
+        className="btn btn-secondary mx-auto w-50 d-flex  justify-content-center "
+        onClick={createPropertyType}
+      >
         {id ? "Actualizar" : "Crear"}
       </button>
-      <div>
-        {propertyTypes.map((propertyType) => (
-          <div key={propertyType._id} className="card my-2 text-capitalize">
-            <div className="card-body d-flex justify-content-between">
-              {propertyType.propertyTypeId} {propertyType.description}
-              <div>
-                <button
-                  className="btn btn-info"
-                  style={{ marginLeft: "5px", flex: 1 }}
-                  onClick={() => handleEditPropertyType(propertyType)}
-                >
-                  Edit
-                </button>
-
-                <button
-                  className="btn btn-danger"
-                  style={{ marginLeft: "5px", flex: 1 }}
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                  onClick={() =>
-                    dispatch({
-                      type: "ADD_MODAL",
-                      payload: [
-                        {
-                          data: propertyTypes,
-                          id: propertyType._id,
-                          title: propertyType.description,
-                          type: "ADD_PROPERTY_TYPE",
-                        },
-                      ],
-                    })
-                  }
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
+      <h4 className="mx-auto d-flex justify-content-center mt-5">
+        Lista de Tipos de Propiedades
+      </h4>
+      <div className="table-responsive w-100 mx-auto my-3">
+        <table className="table  table-striped table-font mx-auto">
+          <thead>
+            <tr>
+              <th></th>
+              <th></th>
+              <th>_id</th>
+              <th>PropetyTypeID</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            {propertyTypes.map((propertyType) => (
+              <tr key={propertyType._id} style={{ cursor: "pointer" }}>
+                <th>
+                  <button
+                    className="btn btn-info"
+                    style={{ marginLeft: "5px", flex: 1 }}
+                    onClick={() => handleEditPropertyType(propertyType)}
+                  >
+                    Edit
+                  </button>
+                </th>
+                <th>
+                  <button
+                    className="btn btn-danger"
+                    style={{ marginLeft: "5px", flex: 1 }}
+                    data-toggle="modal"
+                    data-target="#exampleModal"
+                    onClick={() =>
+                      dispatch({
+                        type: "ADD_MODAL",
+                        payload: [
+                          {
+                            data: propertyTypes,
+                            id: propertyType._id,
+                            title: propertyType.description,
+                            type: "ADD_PROPERTY_TYPE",
+                          },
+                        ],
+                      })
+                    }
+                  >
+                    Delete
+                  </button>
+                </th>
+                <th>{propertyType._id}</th>
+                <th>{propertyType.propertyTypeId}</th>
+                <th>{propertyType.description}</th>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </div>
   );

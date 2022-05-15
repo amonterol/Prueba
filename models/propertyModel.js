@@ -24,7 +24,7 @@ const propertySchema = new mongoose.Schema(
       required: true,
     },
     constructionArea: {
-      type: String,
+      type: Number,
       required: true,
     },
     images: {

@@ -118,7 +118,9 @@ const Owners = () => {
       <Head>
         <title>Owners</title>
       </Head>
-      <h1>Gestión de Owners</h1>
+      <h3 className="mx-auto d-flex justify-content-center my-5">
+        Gestión de Propietarios
+      </h3>
 
       <div className="row">
         <div className="col-md-6 mx-auto my-3 ">
@@ -185,7 +187,10 @@ const Owners = () => {
         </div>
       </div>
 
-      <div className="table-responsive w-100 mx-auto">
+      <h4 className="mx-auto d-flex justify-content-center my-3">
+        Lista de Propietarios
+      </h4>
+      <div className="table-responsive w-100 mx-auto ">
         <table className="table  table-striped table-font">
           <thead className="thead-dark ">
             <tr>

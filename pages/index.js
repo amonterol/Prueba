@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useState, useContext, useEffect } from "react";
+import { DataContext } from "../store/GlobalState";
 
 import { getData } from "../utils/fetchData";
 import PropertyItem from "../components/PropertyItem";
@@ -13,11 +14,18 @@ const Home = (props) => {
   const [isCheck, setIsCheck] = useState(false);
   const router = useRouter();
 
+  const { state, dispatch } = useContext(DataContext);
+
+  useEffect(() => {
+    setProperties(props.properties);
+  }, [props.properties]);
+
   const handleCheck = (id) => {
-    property.forEach((property) => {
+    properties.forEach((property) => {
       if (property._id === id) property.checked = !property.checked;
     });
-    setProperty([...property]);
+
+    setProperties([...properties]);
   };
 
   const handleCheckALL = () => {
@@ -85,8 +93,6 @@ const Home = (props) => {
   );
 };
 
-export default Home;
-
 export async function getServerSideProps() {
   const res = await getData("property");
 
@@ -97,3 +103,5 @@ export async function getServerSideProps() {
     }, // will be passed to the page component as props
   };
 }
+
+export default Home;

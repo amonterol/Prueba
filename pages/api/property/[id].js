@@ -47,6 +47,7 @@ const updateProperty = async (req, res) => {
       constructionArea,
       propertyTypeId,
       ownerId,
+      images,
     } = req.body;
 
     if (!property_Id)
