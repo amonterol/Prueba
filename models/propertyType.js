@@ -21,4 +21,4 @@ const propertyTypeSchema = new mongoose.Schema(
 
 module.exports =
   mongoose.models.PropertyType ||
-  mongoose.model("PropertyType", propertyTypeSchema);
+  mongoose.model("propertyType", propertyTypeSchema);
