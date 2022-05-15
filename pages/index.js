@@ -53,136 +53,158 @@ const Home = (props) => {
 
   return (
     <div className="home_page">
-      <div
-        className="delete_all btn btn-danger mt-2"
-        style={{ marginBottom: "-10px" }}
-      >
-        <input
-          type="checkbox"
-          checked={isCheck}
-          onChange={handleCheckALL}
-          style={{
-            width: "25px",
-            height: "25px",
-            transform: "translateY(8px)",
-          }}
-        />
-
-        <button
-          className="btn btn-danger ml-1"
-          data-toggle="modal"
-          data-target="#exampleModal"
-          onClick={handleDeleteAll}
-        >
-          Delete all properties
-        </button>
-      </div>
-      <div
-        className="btn btn-primary mt-2 ml-2 p-3"
-        style={{ marginBottom: "-10px", width: "12em", height: "3.4em" }}
-      >
-        <Link href={`create`}>
-          <a
-            style={{
-              marginRight: "0.1em",
-            }}
-          >
-            Create New Property
-          </a>
-        </Link>
-      </div>
-
       <div className="my-4">
         <Head>
           <title>Home</title>
         </Head>
 
         {properties.length === 0 ? (
-          <h3>No hay propiedades para mostrar</h3>
+          <>
+            {" "}
+            <div
+              className="btn btn-primary mt-2 ml-2 p-3"
+              style={{ marginBottom: "1em", width: "12em", height: "3.4em" }}
+            >
+              <Link href={`create`}>
+                <a
+                  style={{
+                    marginRight: "0.1em",
+                  }}
+                >
+                  Create New Property
+                </a>
+              </Link>
+            </div>
+            <h3>No hay propiedades para mostrar</h3>
+          </>
         ) : (
-          <div className="table-responsive w-100 mx-auto ">
-            <table className="table  table-striped table-font table-bordered">
-              <thead className="thead-light ">
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col"></th>
-                  <th scope="col">Imagen #1</th>
-                  <th scope="col">_id</th>
-                  <th scope="col">Property_Id</th>
-                  <th scope="col">Number</th>
-                  <th scope="col">Address</th>
-                  <th scope="col">Area</th>
-                  <th scope="col">Construction Area</th>
-                  <th scope="col">Property Type</th>
-                  <th scope="col">Owner</th>
-                </tr>
-              </thead>
-              <tbody>
-                {properties.map((property) => (
-                  <tr key={property._id} style={{ cursor: "pointer" }}>
-                    <th scope="row">
-                      <Link href={`create/${property._id}`}>
-                        <a
-                          className="btn btn-info"
-                          style={{ marginRight: "5px", flex: 1 }}
-                        >
-                          Edit
-                        </a>
-                      </Link>
-                    </th>
-                    <th>
-                      <button
-                        className="btn btn-danger"
-                        style={{ marginLeft: "5px", flex: 1 }}
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        onClick={() =>
-                          dispatch({
-                            type: "ADD_MODAL",
-                            payload: [
-                              {
-                                data: "",
-                                id: property._id,
-                                title: property.number,
-                                type: "DELETE_PROPERTY",
-                              },
-                            ],
-                          })
-                        }
-                      >
-                        Delete
-                      </button>
-                    </th>
-                    <th>
-                      <div className="card mx-3 p-0" style={{ width: "6rem" }}>
-                        {
-                          <input
-                            type="checkbox"
-                            checked={property.checked}
-                            className="position-absolute"
-                            style={{ height: "20px", width: "20px" }}
-                            onChange={() => handleCheck(property._id)}
-                          />
-                        }
-                        <img
-                          src={property.images[0].url}
-                          alt={property.images[0].url}
-                        />
-                      </div>
-                    </th>
-                    <th>{property._id}</th>
-                    <th>{property.property_Id}</th>
-                    <th>{property.number}</th>
-                    <th>{property.address}</th>
-                    <th>{property.area}</th>
-                    <th>{property.constructionArea}</th>
-                    <th>{property.propertyTypeId}</th>
-                    <th>{property.ownerId}</th>
+          <>
+            <div
+              className="delete_all btn btn-danger mt-2"
+              style={{ marginBottom: "1em" }}
+            >
+              <input
+                type="checkbox"
+                checked={isCheck}
+                onChange={handleCheckALL}
+                style={{
+                  width: "25px",
+                  height: "25px",
+                  transform: "translateY(8px)",
+                }}
+              />
+
+              <button
+                className="btn btn-danger ml-1"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                onClick={handleDeleteAll}
+              >
+                Delete all properties
+              </button>
+            </div>
+            <div
+              className="btn btn-primary mt-2 ml-2 p-3"
+              style={{ marginBottom: "1em", width: "12em", height: "3.4em" }}
+            >
+              <Link href={`create`}>
+                <a
+                  style={{
+                    marginRight: "0.1em",
+                  }}
+                >
+                  Create New Property
+                </a>
+              </Link>
+            </div>
+
+            <div className="table-responsive w-100 mx-auto ">
+              <table className="table  table-striped table-font table-bordered">
+                <thead className="thead-light ">
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col">Imagen #1</th>
+                    <th scope="col">_id</th>
+                    <th scope="col">Property_Id</th>
+                    <th scope="col">Number</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Area</th>
+                    <th scope="col">Construction Area</th>
+                    <th scope="col">Property Type</th>
+                    <th scope="col">Owner</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {properties.map((property) => (
+                    <tr key={property._id} style={{ cursor: "pointer" }}>
+                      <th scope="row">
+                        <Link href={`create/${property._id}`}>
+                          <a
+                            className="btn btn-info"
+                            style={{ marginRight: "5px", flex: 1 }}
+                          >
+                            Edit
+                          </a>
+                        </Link>
+                      </th>
+                      <th>
+                        <button
+                          className="btn btn-danger"
+                          style={{ marginLeft: "5px", flex: 1 }}
+                          data-toggle="modal"
+                          data-target="#exampleModal"
+                          onClick={() =>
+                            dispatch({
+                              type: "ADD_MODAL",
+                              payload: [
+                                {
+                                  data: "",
+                                  id: property._id,
+                                  title: property.number,
+                                  type: "DELETE_PROPERTY",
+                                },
+                              ],
+                            })
+                          }
+                        >
+                          Delete
+                        </button>
+                      </th>
+                      <th>
+                        <div
+                          className="card mx-3 p-0"
+                          style={{ width: "6rem" }}
+                        >
+                          {
+                            <input
+                              type="checkbox"
+                              checked={property.checked}
+                              className="position-absolute"
+                              style={{ height: "20px", width: "20px" }}
+                              onChange={() => handleCheck(property._id)}
+                            />
+                          }
+                          <img
+                            src={property.images[0].url}
+                            alt={property.images[0].url}
+                          />
+                        </div>
+                      </th>
+                      <th>{property._id}</th>
+                      <th>{property.property_Id}</th>
+                      <th>{property.number}</th>
+                      <th>{property.address}</th>
+                      <th>{property.area}</th>
+                      <th>{property.constructionArea}</th>
+                      <th>{property.propertyTypeId}</th>
+                      <th>{property.ownerId}</th>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </div>
     </div>
