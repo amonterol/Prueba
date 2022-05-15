@@ -48,14 +48,20 @@ const updatePropertyType = async (req, res) => {
 const deletePropertyType = async (req, res) => {
   try {
     const { id } = req.query;
-    console.log(id);
-    /*
-    const properties = await Properties.findOne({ propertyType: id });
-    if (properties)
+
+    const propertyType = await PropertyType.findById(id);
+
+    var num = propertyType.propertyTypeId;
+
+    const properties = await Properties.find({
+      propertyTypeId: num,
+    });
+
+    if (properties.length > 0)
       return res.status(400).json({
-        err: "Please delete all properties with a relationship wih propertyType",
+        err: "Antes de proceder debe borrar todas las propiedades relacionadas con este propertyType",
       });
-*/
+
     await PropertyType.findByIdAndDelete(id);
 
     res.json({ msg: "Success! Deleted a property type" });

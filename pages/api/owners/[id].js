@@ -1,6 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import connectDB from "../../../utils/connectDB";
 import Owner from "../../../models/OwnerModel";
+import Properties from "../../../models/PropertyModel";
 
 connectDB();
 
@@ -78,14 +79,20 @@ const updateOwner = async (req, res) => {
 const deleteOwner = async (req, res) => {
   try {
     const { id } = req.query;
-    console.log(id);
-    /*
-    const properties = await Properties.findOne({ Owner: id });
-    if (properties)
+
+    const owner = await Owner.findById(id);
+
+    var num = owner.ownerId;
+
+    const properties = await Properties.find({
+      ownerId: num,
+    });
+
+    if (properties.length > 0)
       return res.status(400).json({
-        err: "Please delete all properties with a relationship wih Owner",
+        err: "Antes de proceder debe borrar todas las propiedades relacionadas con este propertyType",
       });
-*/
+
     await Owner.findByIdAndDelete(id);
 
     res.json({ msg: "Success! Deleted a property type" });
