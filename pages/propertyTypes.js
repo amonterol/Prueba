@@ -19,6 +19,7 @@ const PropertyTypes = () => {
   const [id, setId] = useState("");
 
   const [bandera, setBandera] = useState(true);
+  const [banderas, setBanderas] = useState(true);
 
   const createPropertyType = async () => {
     const errMsg = validationPropertyType(propertyTypeId, description);
