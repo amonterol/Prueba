@@ -7,6 +7,7 @@ import { DataContext } from "../store/GlobalState";
 
 import { updateItem } from "../store/Actions";
 import { postData, putData } from "../utils/fetchData";
+import validationPropertyType from "../utils/validationPropertyType";
 
 const PropertyTypes = () => {
   const [propertyTypeId, setPropertyTypeId] = useState("");
@@ -20,17 +21,11 @@ const PropertyTypes = () => {
   const [bandera, setBandera] = useState(true);
 
   const createPropertyType = async () => {
-    if (!propertyTypeId)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Property Type Id can not be left blank." },
-      });
+    const errMsg = validationPropertyType(propertyTypeId, description);
 
-    if (!description)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Description can not be left blank." },
-      });
+    if (errMsg) {
+      return dispatch({ type: "NOTIFY", payload: { error: errMsg } });
+    }
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
 

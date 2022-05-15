@@ -37,45 +37,7 @@ const Owners = () => {
     }
 
     dispatch({ type: "NOTIFY", payload: { loading: true } });
-    /*
-    if (!ownerId)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Owner Id can not be left blank." },
-      });
 
-    if (!name)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Name can not be left blank." },
-      });
-
-    if (!telephone)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Telephone can not be left blank." },
-      });
-
-    if (!email)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Email can not be left blank." },
-      });
-
-    if (!identificationNumber)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "IdentificationNumber can not be left blank." },
-      });
-
-    if (!address)
-      return dispatch({
-        type: "NOTIFY",
-        payload: { error: "Address can not be left blank." },
-      });
-
-    dispatch({ type: "NOTIFY", payload: { loading: true } });
-*/
     let res;
     if (id) {
       res = await putData(`owners/${id}`, {

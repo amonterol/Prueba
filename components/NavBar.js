@@ -26,16 +26,14 @@ function NavBar() {
       >
         <div className="navbar-nav">
           <Link href="/">
-            <a className="nav-item nav-link">Properties</a>
+            <a className="nav-item nav-link btn-outline-info">Properties</a>
           </Link>
-          <Link href="/create">
-            <a className="nav-item nav-link">Create Property</a>
-          </Link>
+
           <Link href="/propertyTypes">
-            <a className="nav-item nav-link">Property Types</a>
+            <a className="nav-item nav-link btn-outline-info">Property Types</a>
           </Link>
           <Link href="/owners">
-            <a className="nav-item nav-link">Owners</a>
+            <a className="nav-item nav-link btn-outline-info">Owners</a>
           </Link>
         </div>
       </div>

@@ -74,9 +74,24 @@ const Home = (props) => {
           data-target="#exampleModal"
           onClick={handleDeleteAll}
         >
-          DELETE ALL
+          Delete all properties
         </button>
       </div>
+      <div
+        className="btn btn-primary mt-2 ml-2 p-3"
+        style={{ marginBottom: "-10px", width: "12em", height: "3.4em" }}
+      >
+        <Link href={`create`}>
+          <a
+            style={{
+              marginRight: "0.1em",
+            }}
+          >
+            Create New Property
+          </a>
+        </Link>
+      </div>
+
       <div className="my-4">
         <Head>
           <title>Home</title>
