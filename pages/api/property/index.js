@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import connectDB from "../../../utils/connectDB";
-import Property from "../../../models/PropertyModel";
+import Property from "../../../models/property";
 
 connectDB();
 
@@ -81,11 +81,9 @@ const createProperty = async (req, res) => {
 
     const property = await Property.findOne({ property_Id });
     if (property) {
-      return res
-        .status(400)
-        .json({
-          err: "La property_Id fue registrada anteriormente en la base de datos.",
-        });
+      return res.status(400).json({
+        err: "La property_Id fue registrada anteriormente en la base de datos.",
+      });
     }
 
     const newProperty = new Property({

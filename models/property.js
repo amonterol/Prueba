@@ -48,4 +48,4 @@ const propertySchema = new mongoose.Schema(
 );
 
 module.exports =
-  mongoose.models.Property || mongoose.model("Property", propertySchema);
+  mongoose.models.Property || mongoose.model("property", propertySchema);

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import connectDB from "../../../utils/connectDB";
-import Owner from "../../../models/OwnerModel";
+import Owner from "../../../models/owner";
 
 connectDB();
 

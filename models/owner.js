@@ -36,4 +36,4 @@ const ownerSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.models.Owner || mongoose.model("Owner", ownerSchema);
+module.exports = mongoose.models.Owner || mongoose.model("owner", ownerSchema);

@@ -1,7 +1,7 @@
 /* eslint-disable import/no-anonymous-default-export */
 import connectDB from "../../../utils/connectDB";
-import PropertyType from "../../../models/PropertyTypeModel";
-import Properties from "../../../models/PropertyModel";
+import PropertyType from "../../../models/propertyType";
+import Properties from "../../../models/property";
 
 connectDB();
 
